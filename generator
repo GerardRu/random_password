@@ -1,0 +1,18 @@
+import string, random
+
+def rand_password():
+    select = string.ascii_letters + '0123456789' + '!@#$%&?' # Selection of possible characters
+    password = ''
+
+    while True:
+        pass_length = int(input('Enter password length: '))
+
+        if pass_length > 6 and pass_length < 17:
+            new_password = password.join(random.choice(select) for i in range(0, pass_length))
+            break;
+        else:
+            print('Password length range invalid')
+
+    return(new_password)
+
+print('New password generated:', rand_password())
