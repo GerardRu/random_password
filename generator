@@ -1,7 +1,7 @@
-import string, random
+import re, string, random
 
 def rand_password():
-    select = string.ascii_letters + '0123456789' + '!@#$%&?' # Selection of possible characters
+    select = string.ascii_letters + '0123456789' + '!@#$%&?' #Selection of possible characters
     password = ''
 
     while True:
@@ -15,4 +15,31 @@ def rand_password():
 
     return(new_password)
 
-print('New password generated:', rand_password())
+def passStrength(p):
+    while True:
+        if not re.search('[a-z]', p):
+            print('No lowercase letter included')
+            break
+        elif not re.search('[A-Z]', p):
+            print('No uppercase letter included')
+            break
+        elif not re.search('[0-9]', p):
+            print('No number included')
+            break
+        elif not re.search('[!$#@%&]', p):
+            print('No special character included')
+            break
+        elif re.search('\s', p): # the '\s' matches whitespace
+            break
+        else:
+            print('Password strength is good.')
+            return(1)
+            break
+
+gen_pass = rand_password()
+passCheck = passStrength(gen_pass)
+if passCheck == 1:
+    print('New password generated:', gen_pass)
+else:
+    print('Generated password is too weak.')
+
