@@ -16,25 +16,19 @@ def rand_password():
     return(new_password)
 
 def passStrength(p):
-    while True:
         if not re.search('[a-z]', p):
-            print('No lowercase letter included')
-            break
+            print('No lowercase letter included.')
         elif not re.search('[A-Z]', p):
-            print('No uppercase letter included')
-            break
+            print('No uppercase letter included.')
         elif not re.search('[0-9]', p):
-            print('No number included')
-            break
+            print('No number included.')
         elif not re.search('[!$#@%&]', p):
-            print('No special character included')
-            break
+            print('No special character included.')
         elif re.search('\s', p): # the '\s' matches whitespace
-            break
+            print('White spaces invalid.')
         else:
             print('Password strength is good.')
             return(1)
-            break
 
 gen_pass = rand_password()
 passCheck = passStrength(gen_pass)
