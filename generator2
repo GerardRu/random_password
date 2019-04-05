@@ -1,0 +1,47 @@
+# This program involves two functions: rand_password(), which is the
+# password generator, and passStrength(p), which grades the strength
+# of the generated password.
+
+import re, string, random
+
+# Password Generator Function
+def rand_password():
+    # Selection of possible characters
+    select = string.ascii_letters + '0123456789' + '!"#$%&()*+,-./:;<=>?@^_`{|}~'
+    password = ''
+
+    while True:
+        # Set password length within given valid range
+        pass_length = int(input('Enter password length from 6 to 128: '))
+
+        if pass_length >= 6 and pass_length <= 128:
+            # Fills the empty string password with random characters from select
+            new_password = password.join(random.choice(select) for i in range(0, pass_length))
+            break;
+        else:
+            print('Password length range invalid')
+
+    return(new_password)
+
+# Password Strength Function
+def passStrength(p):
+        # Uses regex search method to check specific criteria
+        if not re.search('[a-z]', p):
+            print('No lowercase letter included.')
+        elif not re.search('[A-Z]', p):
+            print('No uppercase letter included.')
+        elif not re.search('[0-9]', p):
+            print('No number included.')
+        elif not re.search('[!"#$%&()*+,-./:;<=>?@^_`{|}~]', p):
+            print('No special character included.')
+        elif re.search('\s', p): # The '\s' matches whitespace
+            print('White spaces invalid.')
+        else:
+            return(1)
+
+gen_pass = rand_password()
+# Will continue to generate a password until proper strength is met
+while passStrength(gen_pass) != 1:
+    gen_pass = rand_password()
+
+print('New password generated:', gen_pass)
